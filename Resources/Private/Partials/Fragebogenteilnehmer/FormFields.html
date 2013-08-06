@@ -1,0 +1,24 @@
+<label for="titel">
+	<f:translate key="tx_blsvfragebogen_domain_model_fragebogenteilnehmer.titel" />
+</label><br />
+	<f:form.textfield property="titel" /><br />
+<label for="art">
+	<f:translate key="tx_blsvfragebogen_domain_model_fragebogenteilnehmer.art" />
+</label><br />
+	<f:form.textfield property="art" /><br />
+<label for="nr">
+	<f:translate key="tx_blsvfragebogen_domain_model_fragebogenteilnehmer.nr" />
+</label><br />
+	<f:form.textfield property="nr" /><br />
+<label for="ort">
+	<f:translate key="tx_blsvfragebogen_domain_model_fragebogenteilnehmer.ort" />
+</label><br />
+	<f:form.textfield property="ort" /><br />
+<label for="begin">
+	<f:translate key="tx_blsvfragebogen_domain_model_fragebogenteilnehmer.begin" />
+</label><br />
+	<f:form.textfield property="begin"  value="{fragebogenteilnehmer.begin->f:format.date()}" /><br />
+<label for="end">
+	<f:translate key="tx_blsvfragebogen_domain_model_fragebogenteilnehmer.end" />
+</label><br />
+	<f:form.textfield property="end"  value="{fragebogenteilnehmer.end->f:format.date()}" /><br />

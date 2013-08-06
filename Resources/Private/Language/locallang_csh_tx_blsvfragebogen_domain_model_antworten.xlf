@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2013-08-05T14:08:07Z" product-name="blsvfragebogen">
+		<header/>
+		<body>
+
+			<trans-unit id="externeuid.description">
+				<source>ReferentenUID</source>
+			</trans-unit>
+			<trans-unit id="value.description">
+				<source>Wert</source>
+			</trans-unit>
+			<trans-unit id="anmerkung.description">
+				<source>Anmerkung</source>
+			</trans-unit>
+			<trans-unit id="sontigestext.description">
+				<source>Sonstiges, und zwar:</source>
+			</trans-unit>
+			<trans-unit id="feuser.description">
+				<source>feuser</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

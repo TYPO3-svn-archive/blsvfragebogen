@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2013-08-05T14:08:07Z" product-name="blsvfragebogen">
+		<header/>
+		<body>
+
+			<trans-unit id="tx_blsvfragebogen_domain_model_fragebogenteilnehmer">
+				<source>Fragebogenteilnehmer</source>
+			</trans-unit>
+			<trans-unit id="tx_blsvfragebogen_domain_model_fragebogenteilnehmer.titel">
+				<source>Titel</source>
+			</trans-unit>
+			<trans-unit id="tx_blsvfragebogen_domain_model_fragebogenteilnehmer.art">
+				<source>Art des Fragebogens</source>
+			</trans-unit>
+			<trans-unit id="tx_blsvfragebogen_domain_model_fragebogenteilnehmer.nr">
+				<source>Veranstaltungsnummer</source>
+			</trans-unit>
+			<trans-unit id="tx_blsvfragebogen_domain_model_fragebogenteilnehmer.ort">
+				<source>ort</source>
+			</trans-unit>
+			<trans-unit id="tx_blsvfragebogen_domain_model_fragebogenteilnehmer.begin">
+				<source>Beginn</source>
+			</trans-unit>
+			<trans-unit id="tx_blsvfragebogen_domain_model_fragebogenteilnehmer.end">
+				<source>Ende</source>
+			</trans-unit>
+			<trans-unit id="tx_blsvfragebogen_domain_model_fragebogenteilnehmer.fragebogen">
+				<source>fragebogen</source>
+			</trans-unit>
+			<trans-unit id="tx_blsvfragebogen_domain_model_fragebogenteilnehmer.feuser">
+				<source>feuser</source>
+			</trans-unit>
+			
+			<trans-unit id="tx_blsvfragebogen_domain_model_fragen">
+				<source>Fragen</source>
+			</trans-unit>
+			<trans-unit id="tx_blsvfragebogen_domain_model_fragen.gruppe">
+				<source>gruppe</source>
+			</trans-unit>
+			<trans-unit id="tx_blsvfragebogen_domain_model_fragen.frage">
+				<source>frage</source>
+			</trans-unit>
+			<trans-unit id="tx_blsvfragebogen_domain_model_fragen.typ">
+				<source>typ</source>
+			</trans-unit>
+			<trans-unit id="tx_blsvfragebogen_domain_model_fragen.externebezeichnung">
+				<source>externebezeichnung</source>
+			</trans-unit>
+			<trans-unit id="tx_blsvfragebogen_domain_model_fragen.moeglcheantworten">
+				<source>moeglcheantworten</source>
+			</trans-unit>
+			
+			<trans-unit id="tx_blsvfragebogen_domain_model_antworten">
+				<source>Antworten</source>
+			</trans-unit>
+			<trans-unit id="tx_blsvfragebogen_domain_model_antworten.externeuid">
+				<source>ReferentenUID</source>
+			</trans-unit>
+			<trans-unit id="tx_blsvfragebogen_domain_model_antworten.value">
+				<source>Wert</source>
+			</trans-unit>
+			<trans-unit id="tx_blsvfragebogen_domain_model_antworten.anmerkung">
+				<source>Anmerkung</source>
+			</trans-unit>
+			<trans-unit id="tx_blsvfragebogen_domain_model_antworten.sontigestext">
+				<source>Sonstiges, und zwar:</source>
+			</trans-unit>
+			<trans-unit id="tx_blsvfragebogen_domain_model_antworten.feuser">
+				<source>feuser</source>
+			</trans-unit>
+			
+			<trans-unit id="tx_blsvfragebogen_domain_model_moeglicheantworten">
+				<source>Moeglicheantworten</source>
+			</trans-unit>
+			<trans-unit id="tx_blsvfragebogen_domain_model_moeglicheantworten.vorbelegung">
+				<source>vorbelegung</source>
+			</trans-unit>
+			<trans-unit id="tx_blsvfragebogen_domain_model_moeglicheantworten.typ">
+				<source>typ</source>
+			</trans-unit>
+			<trans-unit id="tx_blsvfragebogen_domain_model_moeglicheantworten.antwort">
+				<source>Antworttext</source>
+			</trans-unit>
+			<trans-unit id="tx_blsvfragebogen_domain_model_moeglicheantworten.antworten">
+				<source>antworten</source>
+			</trans-unit>
+			
+			<trans-unit id="tx_blsvfragebogen_domain_model_fragebogen">
+				<source>Fragebogen</source>
+			</trans-unit>
+			<trans-unit id="tx_blsvfragebogen_domain_model_fragebogen.fragen">
+				<source>fragen</source>
+			</trans-unit>
+			
+		</body>
+	</file>
+</xliff>
