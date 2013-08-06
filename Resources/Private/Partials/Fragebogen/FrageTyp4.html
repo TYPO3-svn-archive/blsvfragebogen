@@ -1,0 +1,5 @@
+<f:format.html>{frage.frage}</f:format.html>
+<f:for each="{frage.moeglcheantworten}" as="antwort" >
+	<f:form.radio  name="fragebogenteilnehmer.fragebogen.fragen.moeglcheantworten.antwort.value" value="1" /> ja 
+	<f:form.radio name="fragebogenteilnehmer.fragebogen.fragen.moeglcheantworten.antwort.value" value="0" /> nein 
+</f:for>

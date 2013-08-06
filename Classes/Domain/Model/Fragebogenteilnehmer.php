@@ -78,7 +78,7 @@ class Fragebogenteilnehmer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntit
 	/**
 	 * fragebogen
 	 *
-	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\BLSV\Blsvfragebogen\Domain\Model\Fragebogen>
+	 * @var \BLSV\Blsvfragebogen\Domain\Model\Fragebogen
 	 * @lazy
 	 */
 	protected $fragebogen;
@@ -86,61 +86,16 @@ class Fragebogenteilnehmer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntit
 	/**
 	 * feuser
 	 *
-	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FrontendUser>
+	 * @var \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
 	 * @lazy
 	 */
 	protected $feuser;
 
-	/**
-	 * __construct
-	 *
-	 * @return Fragebogen
-	 */
-	public function __construct() {
-		//Do not remove the next line: It would break the functionality
-		$this->initStorageObjects();
-	}
-
-	/**
-	 * Initializes all ObjectStorage properties.
-	 *
-	 * @return void
-	 */
-	protected function initStorageObjects() {
-		/**
-		 * Do not modify this method!
-		 * It will be rewritten on each save in the extension builder
-		 * You may modify the constructor of this class instead
-		 */
-		$this->fragebogen = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-		
-		$this->feuser = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-	}
-
-	/**
-	 * Adds a FrontendUser
-	 *
-	 * @param \TYPO3\CMS\Extbase\Domain\Model\FrontendUser $feuser
-	 * @return void
-	 */
-	public function addFeuser(\TYPO3\CMS\Extbase\Domain\Model\FrontendUser $feuser) {
-		$this->feuser->attach($feuser);
-	}
-
-	/**
-	 * Removes a FrontendUser
-	 *
-	 * @param \TYPO3\CMS\Extbase\Domain\Model\FrontendUser $feuserToRemove The FrontendUser to be removed
-	 * @return void
-	 */
-	public function removeFeuser(\TYPO3\CMS\Extbase\Domain\Model\FrontendUser $feuserToRemove) {
-		$this->feuser->detach($feuserToRemove);
-	}
 
 	/**
 	 * Returns the feuser
 	 *
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FrontendUser> $feuser
+	 * @return \TYPO3\CMS\Extbase\Domain\Model\FrontendUser $feuser
 	 */
 	public function getFeuser() {
 		return $this->feuser;
@@ -149,10 +104,10 @@ class Fragebogenteilnehmer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntit
 	/**
 	 * Sets the feuser
 	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FrontendUser> $feuser
+	 * @param \TYPO3\CMS\Extbase\Domain\Model\FrontendUser $feuser
 	 * @return void
 	 */
-	public function setFeuser(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $feuser) {
+	public function setFeuser( \TYPO3\CMS\Extbase\Domain\Model\FrontendUser $feuser) {
 		$this->feuser = $feuser;
 	}
 
@@ -270,30 +225,12 @@ class Fragebogenteilnehmer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntit
 		$this->end = $end;
 	}
 
-	/**
-	 * Adds a Fragen
-	 *
-	 * @param \BLSV\Blsvfragebogen\Domain\Model\Fragebogen $fragebogen
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\BLSV\Blsvfragebogen\Domain\Model\Fragebogen> fragebogen
-	 */
-	public function addFragebogen(\BLSV\Blsvfragebogen\Domain\Model\Fragebogen $fragebogen) {
-		$this->fragebogen->attach($fragebogen);
-	}
 
-	/**
-	 * Removes a Fragen
-	 *
-	 * @param \BLSV\Blsvfragebogen\Domain\Model\Fragebogen $fragebogenToRemove The Fragebogen to be removed
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\BLSV\Blsvfragebogen\Domain\Model\Fragebogen> fragebogen
-	 */
-	public function removeFragebogen(\BLSV\Blsvfragebogen\Domain\Model\Fragebogen $fragebogenToRemove) {
-		$this->fragebogen->detach($fragebogenToRemove);
-	}
 
 	/**
 	 * Returns the fragebogen
 	 *
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\BLSV\Blsvfragebogen\Domain\Model\Fragebogen> fragebogen
+	 * @return\BLSV\Blsvfragebogen\Domain\Model\Fragebogen fragebogen
 	 */
 	public function getFragebogen() {
 		return $this->fragebogen;
@@ -302,10 +239,10 @@ class Fragebogenteilnehmer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntit
 	/**
 	 * Sets the fragebogen
 	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\BLSV\Blsvfragebogen\Domain\Model\Fragebogen> $fragebogen
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\BLSV\Blsvfragebogen\Domain\Model\Fragebogen> fragebogen
+	 * @param \BLSV\Blsvfragebogen\Domain\Model\Fragebogen $fragebogen
+	 * @return void
 	 */
-	public function setFragebogen(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $fragebogen) {
+	public function setFragebogen( \BLSV\Blsvfragebogen\Domain\Model\Fragebogen $fragebogen) {
 		$this->fragebogen = $fragebogen;
 	}
 

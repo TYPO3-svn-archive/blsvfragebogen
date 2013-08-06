@@ -1,0 +1,39 @@
+<f:format.html>{frage.frage}</f:format.html>
+
+<f:for each="{options.eintraege}" as="eintragsArt" key="externebezeichnung">
+ 	<f:if condition="{frage.externebezeichnung}=={externebezeichnung}">
+		<f:for each="{eintragsArt}" as="eintrag" >
+			<b>{eintrag.uid} {eintrag.name}</b><br />
+		    
+			<table>
+				<tr><th class="linksoben"></th>
+					<th>:D</th>
+					<th>:-)</th>
+					<th>:-|</th>
+					<th>;-(</th>
+					<th class="rechtsoben">Anmerkung</th>
+					
+				</tr>
+				
+				<f:for each="{frage.moeglcheantworten}" as="antwort" >
+					<tr>
+						<td>{antwort.antwort} <f:if condition="{antwort.typ}==2"><br /> <f:form.textfield property="fragebogenteilnehmer.fragebogen.fragen.xantworten[{eintrag.uid}].antwort.sontigestext"  /> </f:if></td>
+						<td><f:form.radio name="fragebogenteilnehmer.fragebogen.fragen.xantworten[{eintrag.uid}][{antwort.uid}].antwort.value" value="1" /></td>
+						<td><f:form.radio name="fragebogenteilnehmer.fragebogen.fragen.xantworten[{eintrag.uid}][{antwort.uid}].antwort.value" value="2" /></td>
+						<td><f:form.radio name="fragebogenteilnehmer.fragebogen.fragen.xantworten[{eintrag.uid}][{antwort.uid}].antwort.value" value="3" /></td>
+						<td><f:form.radio name="fragebogenteilnehmer.fragebogen.fragen.xantworten[{eintrag.uid}][{antwort.uid}].antwort.value" value="4" /></td>
+						<td><f:form.textfield name="fragebogenteilnehmer.fragebogen.fragen.xantworten[{eintrag.uid}][{antwort.uid}].antwort.anmerkung"  /></td>
+				</f:for>
+				<tr><th class="linksunten"></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th class="rechtsunten"></th>
+					
+				</tr>
+			</table>
+			<br />
+		</f:for>
+	</f:if>
+</f:for>

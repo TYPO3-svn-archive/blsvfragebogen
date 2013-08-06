@@ -1,0 +1,4 @@
+<f:format.html>{frage.frage}</f:format.html>
+<f:for each="{frage.moeglcheantworten}" as="antwort" >
+	<f:form.textarea cols="40" rows="10" property="fragebogenteilnehmer.fragebogen.fragen.moeglcheantworten.antwort.value" value="{frage.frage.moeglicheantworten}" />
+</f:for>	

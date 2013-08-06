@@ -200,6 +200,30 @@ class Fragen extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	public function getMoeglcheantworten() {
 		return $this->moeglcheantworten;
 	}
+	
+	/**
+	 * Returns the moeglcheantwortenOhneantworten
+	 * 
+	 * @param array $eintraege
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\BLSV\Blsvfragebogen\Domain\Model\Moeglicheantworten> moeglcheantworten
+	 */
+	public function getMoeglcheantwortenOhneAntworten($eintraege=NULL) {
+		$moeglcheantwortenOhneantworten = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+		
+		if ($eintraege=NULL){
+			 foreach($this->moeglcheantworten as $moeglicheAntworten){
+		 		if (!$moeglicheAntworten->getFirstAntwort()){
+		 			
+			 		$moeglcheantwortenOhneantworten->attach($moeglicheAntworten);
+			 	}
+			 }
+		}
+		else {
+			echo 'todo: mehrer mögliche Antworten mit Eintraegen';
+		}
+		return $moeglcheantwortenOhneantworten;
+	}
+	
 
 	/**
 	 * Sets the moeglcheantworten

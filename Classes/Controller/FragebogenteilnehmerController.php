@@ -42,6 +42,51 @@ class FragebogenteilnehmerController extends \TYPO3\CMS\Extbase\Mvc\Controller\A
 	protected $fragebogenteilnehmerRepository;
 
 	/**
+	 * fragebogenRepository
+	 *
+	 * @var \BLSV\Blsvfragebogen\Domain\Repository\FragebogenRepository
+	 * @inject
+	 */
+	protected $fragebogenRepository;
+
+	/**
+	 * moeglicheantwortenRepository
+	 *
+	 * @var \BLSV\Blsvfragebogen\Domain\Repository\MoeglicheantwortenRepository
+	 * @inject
+	 */
+	protected $moeglicheantwortenRepository;
+	
+	/**
+	 * feuserRepository
+	 *
+	 * @var \TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository
+	 * @inject
+	 */
+	protected $feuserRepository;
+	
+	/**
+	 * User
+	 *
+	 * @var TYPO3\CMS\Extbase\Domain\Model\FrontendUser
+	 */
+	protected $feuser;
+		
+	/**
+	 * Initializes the current action
+	 *
+	 * @return void
+	 */
+	protected function initializeAction() {
+		$userTSConfig_all = $GLOBALS["TSFE"]->fe_user->getUserTSconf();
+		$this->feuser =  $this->feuserRepository->findByUid( $GLOBALS['TSFE']->fe_user->user['uid'] );
+	
+		if ($this->feuser == NULL) {
+			die('Sie sind nicht als gültiger User angemeldet');
+		}
+	}
+	
+	/**
 	 * action list
 	 *
 	 * @return void
@@ -86,7 +131,7 @@ class FragebogenteilnehmerController extends \TYPO3\CMS\Extbase\Mvc\Controller\A
 	}
 
 	public function initializeEditAction(){
-		echo '<pre>';
+		//echo '<pre>';
 	}
 	
 	/**
@@ -96,40 +141,63 @@ class FragebogenteilnehmerController extends \TYPO3\CMS\Extbase\Mvc\Controller\A
 	 * @return void
 	 */
 	public function editAction(\BLSV\Blsvfragebogen\Domain\Model\Fragebogenteilnehmer $fragebogenteilnehmer=NULL) {
+		
+		$eintraege['referenten'] = array(
+				array( 'uid' => 1, 'name'=> 'martin gonschor' ),
+				array( 'uid' => 2, 'name'=> 'berti golf' )
+		);
+		
+		$eintraege['anderesExternesFeld'] = array(
+				array( 'uid' => 1, 'name'=> 'martin gonschor' ),
+				array( 'uid' => 2, 'name'=> 'berti golf' )
+		);
+		
+		
+
 		$neu = ($fragebogenteilnehmer==NULL);
 		// $neu = true;
 		
 		if ($neu) {
 			$fragebogenteilnehmer = new \BLSV\Blsvfragebogen\Domain\Model\Fragebogenteilnehmer();
-
-			$fragebogen = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-			$fragebogenObj = new \BLSV\Blsvfragebogen\Domain\Model\Fragebogen();
-			$fragebogen->attach($fragebogenObj);
+			$fragebogen = $this->fragebogenRepository->getFirst();
 			$fragebogenteilnehmer->setFragebogen($fragebogen);
-
+			$fragebogenteilnehmer->setFeuser($this->feuser);
 			$this->fragebogenteilnehmerRepository->add($fragebogenteilnehmer);
-
 		}
 		
-		$uid = $fragebogenteilnehmer->getUid();
 		$fragebogen = $fragebogenteilnehmer->getFragebogen();
-		$data = compact('uid', 'fragebogen');
+		
+		
+		$fehlendeAntworten = $fragebogen->getMoeglcheantwortenOhneAntworten($eintraege);
+		
+		foreach ($fehlendeAntworten as $fehlendeAntwort){
+			$antwort = new \BLSV\Blsvfragebogen\Domain\Model\Antworten($this->feuser);
+			$fehlendeAntwort->addAntworten($antwort);	
+			$this->moeglicheantwortenRepository->update($fehlendeAntwort);
+		}
+		
+		
+		$data = compact('fragebogenteilnehmer', 'fragebogen', 'eintraege', 'fehlendeAntworten');		
 		
 		
 		$this->view->assign('fragebogenteilnehmer', $fragebogenteilnehmer);
+		$this->view->assign('eintraege', $eintraege);
 		
 		$this->view->assign('data', $data);
-		
-		
 	}
 
-	/**
+	/*
 	 * action update
 	 *
 	 * @param BLSV\Blsvfragebogenteilnehmer\Domain\Model\Fragebogenteilnehmer
 	 * @return void
 	 */
-	public function updateAction(\BLSV\Blsvfragebogen\Domain\Model\Fragebogenteilnehmer $fragebogenteilnehmer) {
+	//public function updateAction(\BLSV\Blsvfragebogen\Domain\Model\Fragebogenteilnehmer $fragebogenteilnehmer) {
+	public function updateAction() {
+		echo '<pre>';
+		print_r($_REQUEST);
+		exit;
+		
 		$this->fragebogenteilnehmerRepository->update($fragebogenteilnehmer);
 		$this->flashMessageContainer->add('Your Fragebogenteilnehmer was updated.');
 		$this->redirect('list');

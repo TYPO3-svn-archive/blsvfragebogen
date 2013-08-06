@@ -105,5 +105,40 @@ class Fragebogen extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 		$this->fragen = $fragen;
 	}
 
+	/**
+	 * Returns the moeglcheantwortenOhneantworten
+	 *
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\BLSV\Blsvfragebogen\Domain\Model\Moeglicheantworten> moeglcheantworten
+	 */
+	public function getMoeglcheantwortenOhneAntworten() {
+		$moeglcheantwortenOhneantworten = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+		foreach($this->fragen as $frage){
+			if(!$frage->getExternebezeichnung()){
+				foreach($frage->getMoeglcheantwortenOhneAntworten() as $moeglicheAntworten){
+					$moeglcheantwortenOhneantworten->attach($moeglicheAntworten);
+				}
+			}
+		}
+		return $moeglcheantwortenOhneantworten;
+	}
+
+	/**
+	 * Returns the moeglcheantwortenOhneantworten
+	 *
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\BLSV\Blsvfragebogen\Domain\Model\Moeglicheantworten> moeglcheantworten
+	 */
+	public function getMoeglcheantwortenOhneAntwortenExtern($eintraege) {
+		$moeglcheantwortenOhneantworten = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+		foreach($this->fragen as $frage){
+			if($frage->getExternebezeichnung()){
+				
+				foreach($frage->getMoeglcheantwortenOhneAntworten($eintraege) as $moeglicheAntworten){
+					$moeglcheantwortenOhneantworten->attach($moeglicheAntworten);
+				}
+			}
+		}
+		return $moeglcheantwortenOhneantworten;
+	}
+	
 }
 ?>

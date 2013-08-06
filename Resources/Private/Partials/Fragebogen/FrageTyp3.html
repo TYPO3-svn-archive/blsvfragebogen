@@ -1,0 +1,30 @@
+<f:format.html>{frage.frage}</f:format.html>
+
+<table>
+	<tr><th class="linksoben"></th>
+		<th>:D</th>
+		<th>:-)</th>
+		<th>:-|</th>
+		<th>;-(</th>
+		<th class="rechtsoben">Anmerkung</th>
+		
+	</tr>
+	
+	<f:for each="{frage.moeglcheantworten}" as="antwort" >
+		<tr>
+			<td>{antwort.antwort} <f:if condition="{antwort.typ}==2"><br /> <f:form.textfield name="antwort.{antwort.firstAntwort.uid}.sontigestext"  /> </f:if></td>
+			<td><f:form.radio name="antwort.{antwort.firstAntwort.uid}.value" value="1" /></td>
+			<td><f:form.radio name="antwort.{antwort.firstAntwort.uid}.value" value="2" /></td>
+			<td><f:form.radio name="antwort.{antwort.firstAntwort.uid}.value" value="3" /></td>
+			<td><f:form.radio name="antwort.{antwort.firstAntwort.uid}.value" value="4" /></td>
+			<td><f:form.textfield name="antwort.{antwort.firstAntwort.uid}.anmerkung"  /></td>
+	</f:for>
+	<tr><th class="linksunten"></th>
+		<th></th>
+		<th></th>
+		<th></th>
+		<th></th>
+		<th class="rechtsunten"></th>
+		
+	</tr>
+</table>

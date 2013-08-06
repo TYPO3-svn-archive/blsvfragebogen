@@ -155,17 +155,10 @@ $TCA['tx_blsvfragebogen_domain_model_fragebogenteilnehmer'] = array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:blsvfragebogen/Resources/Private/Language/locallang_db.xlf:tx_blsvfragebogen_domain_model_fragebogenteilnehmer.fragebogen',
 			'config' => array(
-				'type' => 'inline',
+				'type' => 'select',
 				'foreign_table' => 'tx_blsvfragebogen_domain_model_fragebogen',
 				'foreign_field' => 'fragebogenteilnehmer',
-				'maxitems'      => 9999,
-				'appearance' => array(
-					'collapseAll' => 0,
-					'levelLinksPosition' => 'top',
-					'showSynchronizationLink' => 1,
-					'showPossibleLocalizationRecords' => 1,
-					'showAllLocalizationLink' => 1
-				),
+				'maxitems'      => 1,
 			),
 		),
 		'feuser' => array(
@@ -174,34 +167,10 @@ $TCA['tx_blsvfragebogen_domain_model_fragebogenteilnehmer'] = array(
 			'config' => array(
 				'type' => 'select',
 				'foreign_table' => 'fe_users',
-				'MM' => 'tx_blsvfragebogen_fragebogenteilnehmer_frontenduser_mm',
+					'foreign_field' => 'feuser',
 				'size' => 10,
 				'autoSizeMax' => 30,
-				'maxitems' => 9999,
-				'multiple' => 0,
-				'wizards' => array(
-					'_PADDING' => 1,
-					'_VERTICAL' => 1,
-					'edit' => array(
-						'type' => 'popup',
-						'title' => 'Edit',
-						'script' => 'wizard_edit.php',
-						'icon' => 'edit2.gif',
-						'popup_onlyOpenIfSelected' => 1,
-						'JSopenParams' => 'height=350,width=580,status=0,menubar=0,scrollbars=1',
-						),
-					'add' => Array(
-						'type' => 'script',
-						'title' => 'Create new',
-						'icon' => 'add.gif',
-						'params' => array(
-							'table' => 'fe_users',
-							'pid' => '###CURRENT_PID###',
-							'setValue' => 'prepend'
-							),
-						'script' => 'wizard_add.php',
-					),
-				),
+				'maxitems' => 1,
 			),
 		),
 	),

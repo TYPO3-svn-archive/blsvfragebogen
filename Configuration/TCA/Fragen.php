@@ -136,6 +136,7 @@ $TCA['tx_blsvfragebogen_domain_model_fragen'] = array(
  	  			 	Array('3 - vier  Werte pro Antwort', '3'),
  	  				Array('4 - ja/nein', '4'), 	  						
  	  			  	Array('5 - nur Text', '5'),
+ 	  				Array('6 - Mehrere Varianble Einträge (z.B. Referenten)', '6'),
 
  			      ),
 			),

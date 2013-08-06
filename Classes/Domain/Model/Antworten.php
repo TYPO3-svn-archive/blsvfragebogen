@@ -38,28 +38,28 @@ class Antworten extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 *
 	 * @var \integer
 	 */
-	protected $externeuid;
+	protected $externeuid=0;
 
 	/**
 	 * Wert
 	 *
 	 * @var \integer
 	 */
-	protected $value;
+	protected $value=0;
 
 	/**
 	 * Anmerkung
 	 *
 	 * @var \string
 	 */
-	protected $anmerkung;
+	protected $anmerkung = '';
 
 	/**
 	 * Sonstiges, und zwar:
 	 *
 	 * @var \string
 	 */
-	protected $sontigestext;
+	protected $sontigestext = '';
 
 	/**
 	 * feuser
@@ -72,11 +72,14 @@ class Antworten extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * __construct
 	 *
+	 * @param \TYPO3\CMS\Extbase\Domain\Model\FrontendUser $feuser
 	 * @return Antworten
 	 */
-	public function __construct() {
+	public function __construct(\TYPO3\CMS\Extbase\Domain\Model\FrontendUser $feuser) {
 		//Do not remove the next line: It would break the functionality
 		$this->initStorageObjects();
+		
+		$this->feuser = $feuser;
 	}
 
 	/**

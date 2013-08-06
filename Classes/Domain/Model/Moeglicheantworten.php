@@ -56,6 +56,15 @@ class Moeglicheantworten extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity 
 	 * @lazy
 	 */
 	protected $antworten;
+	
+	/**
+	 * antwort
+	 *
+	 * @var \string
+	 */
+	protected $antwort='';
+	
+	
 
 	/**
 	 * __construct
@@ -157,6 +166,43 @@ class Moeglicheantworten extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity 
 	public function setVorbelegung($vorbelegung) {
 		$this->vorbelegung = $vorbelegung;
 	}
-
+	
+	/**
+	 * Returns the antwort
+	 *
+	 * @return \string $antwort
+	 */
+	public function getAntwort() {
+		return $this->antwort;
+	}
+	
+	/**
+	 * Sets the antwort
+	 *
+	 * @param \string $antwort
+	 * @return void
+	 */
+	public function setAntwort($antwort) {
+		if (!$this->antwort->getFeuser()){
+			$this->antwort->setFeuser($GLOBALS['TSFE']->fe_user->user['uid']);
+		}
+		$this->antwort = $antwort;
+	}
+	
+	/**
+	 * Returns the antwort
+	 *
+	 * @return \BLSV\Blsvfragebogen\Domain\Model\Antworten  $antwort
+	 */
+	public function getFirstAntwort() {
+		if ($this->antworten){
+			foreach ($this->antworten as $antwort) {
+				if($antwort->getFeuser() && $antwort->getFeuser()->getUid()==$GLOBALS['TSFE']->fe_user->user['uid']){
+					return $antwort;
+				}
+			}
+		}
+		return NULL;
+	}
 }
 ?>
