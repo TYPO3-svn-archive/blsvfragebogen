@@ -105,7 +105,7 @@ CREATE TABLE tx_blsvfragebogen_domain_model_antworten (
 	value int(11) DEFAULT '0' NOT NULL,
 	anmerkung text NOT NULL,
 	sontigestext varchar(255) DEFAULT '' NOT NULL,
-	feuser int(11) unsigned DEFAULT '0',
+	fragebogenteilnehmer int(11) unsigned DEFAULT '0', 
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,

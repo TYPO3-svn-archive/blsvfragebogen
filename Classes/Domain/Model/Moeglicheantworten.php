@@ -192,17 +192,26 @@ class Moeglicheantworten extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity 
 	/**
 	 * Returns the antwort
 	 *
-	 * @return \BLSV\Blsvfragebogen\Domain\Model\Antworten  $antwort
+	 * @param \BLSV\Blsvfragebogen\Domain\Model\Fragebogenteilnehmer $fragebogenteilnehmer
+	 * @param int $externUid
+	 * @return mixed
 	 */
-	public function getFirstAntwort() {
-		if ($this->antworten){
-			foreach ($this->antworten as $antwort) {
-				if($antwort->getFeuser() && $antwort->getFeuser()->getUid()==$GLOBALS['TSFE']->fe_user->user['uid']){
+	public function getFirstAntwort( \BLSV\Blsvfragebogen\Domain\Model\Fragebogenteilnehmer $fragebogenteilnehmer = NULL, $externUid=0  ) {
+		if ( $this->antworten ){		
+			foreach ( $this->antworten as $key => $antwort ) {
+				if ( $fragebogenteilnehmer ){
+					$fragebogenteilnehmerIskorrekt = $antwort->getFragebogenteilnehmer() && ( $antwort->getFragebogenteilnehmer()->getUid() === $fragebogenteilnehmer->getUid() );
+				} 
+				else{ //if there is no fragebogenteilnehmer given, check antworten with feuser
+					$fragebogenteilnehmerIskorrekt = $antwort->getFragebogenteilnehmer() && ($antwort->getFragebogenteilnehmer()->getFeuser()->getUid() == $GLOBALS['TSFE']->fe_user->user['uid']);
+				}
+				
+				if( $fragebogenteilnehmerIskorrekt && ( $antwort->getExterneuid() === $externUid ) ){					
 					return $antwort;
 				}
 			}
 		}
-		return NULL;
+		return NUll;
 	}
 }
 ?>

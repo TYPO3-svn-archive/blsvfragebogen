@@ -108,37 +108,31 @@ class Fragebogen extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the moeglcheantwortenOhneantworten
 	 *
+	 * @param \BLSV\Blsvfragebogen\Domain\Model\Fragebogenteilnehmer $fragebogenteilnehmer
+	 * @param array $eintraege
 	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\BLSV\Blsvfragebogen\Domain\Model\Moeglicheantworten> moeglcheantworten
 	 */
-	public function getMoeglcheantwortenOhneAntworten() {
-		$moeglcheantwortenOhneantworten = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+	public function getMoeglcheantwortenOhneAntworten(  \BLSV\Blsvfragebogen\Domain\Model\Fragebogenteilnehmer $fragebogenteilnehmer=NULL, $eintraege = array() ) {
+		$moeglcheantwortenOhneAntworten = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+		
 		foreach($this->fragen as $frage){
-			if(!$frage->getExternebezeichnung()){
-				foreach($frage->getMoeglcheantwortenOhneAntworten() as $moeglicheAntworten){
-					$moeglcheantwortenOhneantworten->attach($moeglicheAntworten);
+			if( !$frage->getExternebezeichnung() ){
+				foreach( $frage->getMoeglcheantwortenOhneAntworten( $fragebogenteilnehmer ) as $moeglicheAntworten){
+					$moeglcheantwortenOhneAntworten->attach( $moeglicheAntworten );
+				}
+			}
+			else{
+				foreach ( $eintraege[$frage->getExternebezeichnung()] as $eintrag){
+					foreach( $frage->getMoeglcheantwortenOhneAntworten( $fragebogenteilnehmer, $eintrag[uid] ) as $moeglicheAntworten){
+						$moeglcheantwortenOhneAntworten->attach( $moeglicheAntworten );
+					}
 				}
 			}
 		}
-		return $moeglcheantwortenOhneantworten;
+		
+		return $moeglcheantwortenOhneAntworten;
 	}
 
-	/**
-	 * Returns the moeglcheantwortenOhneantworten
-	 *
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\BLSV\Blsvfragebogen\Domain\Model\Moeglicheantworten> moeglcheantworten
-	 */
-	public function getMoeglcheantwortenOhneAntwortenExtern($eintraege) {
-		$moeglcheantwortenOhneantworten = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage;
-		foreach($this->fragen as $frage){
-			if($frage->getExternebezeichnung()){
-				
-				foreach($frage->getMoeglcheantwortenOhneAntworten($eintraege) as $moeglicheAntworten){
-					$moeglcheantwortenOhneantworten->attach($moeglicheAntworten);
-				}
-			}
-		}
-		return $moeglcheantwortenOhneantworten;
-	}
 	
 }
 ?>

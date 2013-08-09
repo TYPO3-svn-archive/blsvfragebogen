@@ -157,7 +157,6 @@ $TCA['tx_blsvfragebogen_domain_model_fragebogenteilnehmer'] = array(
 			'config' => array(
 				'type' => 'select',
 				'foreign_table' => 'tx_blsvfragebogen_domain_model_fragebogen',
-				'foreign_field' => 'fragebogenteilnehmer',
 				'maxitems'      => 1,
 			),
 		),
@@ -167,7 +166,6 @@ $TCA['tx_blsvfragebogen_domain_model_fragebogenteilnehmer'] = array(
 			'config' => array(
 				'type' => 'select',
 				'foreign_table' => 'fe_users',
-					'foreign_field' => 'feuser',
 				'size' => 10,
 				'autoSizeMax' => 30,
 				'maxitems' => 1,

@@ -98,6 +98,7 @@ class Fragebogenteilnehmer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntit
 	 * @return \TYPO3\CMS\Extbase\Domain\Model\FrontendUser $feuser
 	 */
 	public function getFeuser() {
+		
 		return $this->feuser;
 	}
 

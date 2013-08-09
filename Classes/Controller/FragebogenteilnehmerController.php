@@ -58,6 +58,14 @@ class FragebogenteilnehmerController extends \TYPO3\CMS\Extbase\Mvc\Controller\A
 	protected $moeglicheantwortenRepository;
 	
 	/**
+	 * antwortenRepository
+	 *
+	 * @var \BLSV\Blsvfragebogen\Domain\Repository\AntwortenRepository
+	 * @inject
+	 */
+	protected $antwortenRepository;
+	
+	/**
 	 * feuserRepository
 	 *
 	 * @var \TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository
@@ -93,7 +101,7 @@ class FragebogenteilnehmerController extends \TYPO3\CMS\Extbase\Mvc\Controller\A
 	 * @param BLSV\Blsvfragebogenteilnehmer\Domain\Model\Fragebogenteilnehmer
 	 */
 	public function listAction() {
-		$fragebogenteilnehmers = $this->fragebogenteilnehmerRepository->findAll();
+		$fragebogenteilnehmers = $this->fragebogenteilnehmerRepository->findByFeuser( $this->feuser );
 		$this->view->assign('fragebogenteilnehmers', $fragebogenteilnehmers);
 	}
 
@@ -130,10 +138,6 @@ class FragebogenteilnehmerController extends \TYPO3\CMS\Extbase\Mvc\Controller\A
 		$this->redirect('list');
 	}
 
-	public function initializeEditAction(){
-		//echo '<pre>';
-	}
-	
 	/**
 	 * action edit
 	 *
@@ -154,26 +158,22 @@ class FragebogenteilnehmerController extends \TYPO3\CMS\Extbase\Mvc\Controller\A
 		
 		
 
-		$neu = ($fragebogenteilnehmer==NULL);
+		$neu = ( $fragebogenteilnehmer==NULL );
 		// $neu = true;
-		
+		 
 		if ($neu) {
 			$fragebogenteilnehmer = new \BLSV\Blsvfragebogen\Domain\Model\Fragebogenteilnehmer();
 			$fragebogen = $this->fragebogenRepository->getFirst();
-			$fragebogenteilnehmer->setFragebogen($fragebogen);
-			$fragebogenteilnehmer->setFeuser($this->feuser);
-			$this->fragebogenteilnehmerRepository->add($fragebogenteilnehmer);
+			$fragebogenteilnehmer->setFragebogen( $fragebogen );
+			$fragebogenteilnehmer->setFeuser( $this->feuser );
+			$this->fragebogenteilnehmerRepository->add( $fragebogenteilnehmer );
 		}
-		
+	   
 		$fragebogen = $fragebogenteilnehmer->getFragebogen();
-		
-		
-		$fehlendeAntworten = $fragebogen->getMoeglcheantwortenOhneAntworten($eintraege);
-		
+	    $fehlendeAntworten = $fragebogen->getMoeglcheantwortenOhneAntworten( $fragebogenteilnehmer,$eintraege );
+	   
 		foreach ($fehlendeAntworten as $fehlendeAntwort){
-			$antwort = new \BLSV\Blsvfragebogen\Domain\Model\Antworten($this->feuser);
-			$fehlendeAntwort->addAntworten($antwort);	
-			$this->moeglicheantwortenRepository->update($fehlendeAntwort);
+			$this->moeglicheantwortenRepository->update( $fehlendeAntwort );
 		}
 		
 		
@@ -184,23 +184,45 @@ class FragebogenteilnehmerController extends \TYPO3\CMS\Extbase\Mvc\Controller\A
 		$this->view->assign('eintraege', $eintraege);
 		
 		$this->view->assign('data', $data);
+		
+		$moeglicheantworten = $this->moeglicheantwortenRepository->findByUid(1);
+		$this->view->assign('moeglicheantworten', $moeglicheantworten);
 	}
 
-	/*
-	 * action update
-	 *
-	 * @param BLSV\Blsvfragebogenteilnehmer\Domain\Model\Fragebogenteilnehmer
-	 * @return void
-	 */
-	//public function updateAction(\BLSV\Blsvfragebogen\Domain\Model\Fragebogenteilnehmer $fragebogenteilnehmer) {
-	public function updateAction() {
+	public function initializeUpdateAction(){
 		echo '<pre>';
 		print_r($_REQUEST);
-		exit;
+		// print_r($_REQUEST[tx_blsvfragebogen_pi1][test]);
 		
-		$this->fragebogenteilnehmerRepository->update($fragebogenteilnehmer);
-		$this->flashMessageContainer->add('Your Fragebogenteilnehmer was updated.');
-		$this->redirect('list');
+		//$this->arguments['moeglicheantworten']->getPropertyMappingConfiguration()->allowProperties('__identity');
+		//$propertyMappingConfiguration->allowProperties('__identity');
+		
+	}
+	
+	/**
+	 * action update
+	 * 
+	 * param \BLSV\Blsvfragebogen\Domain\Model\Fragebogenteilnehmer $fragebogenteilnehmer
+	 * 
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\BLSV\Blsvfragebogen\Domain\Model\Antworten> $antworten
+	 * @return void
+	 * 
+	*/
+	public function updateAction( \TYPO3\CMS\Extbase\Persistence\ObjectStorage $antworten = NULL) {
+		
+		print_r(get_class($antworten));
+		echo '<br />';		
+
+//		exit;
+		
+		//$this->fragebogenteilnehmerRepository->update($fragebogenteilnehmer);
+		//$this->flashMessageContainer->add('Your Fragebogenteilnehmer was updated.');
+		//$this->redirect('list');
+		$data = compact(
+			'test'
+		);
+		
+		$this->view->assign('data', $data);
 	}
 
 	/**

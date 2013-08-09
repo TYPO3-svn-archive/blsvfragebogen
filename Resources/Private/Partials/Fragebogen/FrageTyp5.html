@@ -1,4 +1,6 @@
+{namespace vh=BLSV\Blsvfragebogen\ViewHelpers}
 <f:format.html>{frage.frage}</f:format.html>
 <f:for each="{frage.moeglcheantworten}" as="antwort" >
-	<f:form.textarea cols="40" rows="10" property="fragebogenteilnehmer.fragebogen.fragen.moeglcheantworten.antwort.value" value="{frage.frage.moeglicheantworten}" />
+
+	<f:form.textarea cols="40" rows="10"  name='antwort[<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" property="uid"  />][anmerkung]' value='<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" property="anmerkung"  />' />
 </f:for>	

@@ -204,22 +204,19 @@ class Fragen extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the moeglcheantwortenOhneantworten
 	 * 
+	 * @param \BLSV\Blsvfragebogen\Domain\Model\Fragebogenteilnehmer $fragebogenteilnehmer
 	 * @param array $eintraege
 	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\BLSV\Blsvfragebogen\Domain\Model\Moeglicheantworten> moeglcheantworten
 	 */
-	public function getMoeglcheantwortenOhneAntworten($eintraege=NULL) {
+	public function getMoeglcheantwortenOhneAntworten( \BLSV\Blsvfragebogen\Domain\Model\Fragebogenteilnehmer $fragebogenteilnehmer = NULL, $externUid = 0 ) {
 		$moeglcheantwortenOhneantworten = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 		
-		if ($eintraege=NULL){
-			 foreach($this->moeglcheantworten as $moeglicheAntworten){
-		 		if (!$moeglicheAntworten->getFirstAntwort()){
-		 			
-			 		$moeglcheantwortenOhneantworten->attach($moeglicheAntworten);
-			 	}
-			 }
-		}
-		else {
-			echo 'todo: mehrer mögliche Antworten mit Eintraegen';
+		foreach ( $this->moeglcheantworten as $moeglicheAntwort ){
+		 	if ( $moeglicheAntwort->getFirstAntwort( $fragebogenteilnehmer, $externUid ) == Null ){
+		 		$antwort = New \BLSV\Blsvfragebogen\Domain\Model\Antworten( $fragebogenteilnehmer, $externUid );
+		 		$moeglicheAntwort->addAntworten( $antwort );
+		 		$moeglcheantwortenOhneantworten->attach( $moeglicheAntwort );			 		
+		 	}
 		}
 		return $moeglcheantwortenOhneantworten;
 	}

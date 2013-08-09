@@ -1,6 +1,9 @@
+{namespace vh=BLSV\Blsvfragebogen\ViewHelpers}
+
 <f:format.html>{frage.frage}</f:format.html>
 <f:for each="{frage.moeglcheantworten}" as="antwort" >
+  
 	<f:if condition="{antwort.typ}==2"><br /> </f:if>
-	<f:form.checkbox name="antwort[{antwort.firstAntwort.uid}].value" value="1"  checked="{antwort.firstAntwort.value}"   /> {antwort.antwort}
-	<f:if condition="{antwort.typ}==2"> <f:form.textfield property="antwort[{antwort.uid}].sontigestext" value="{antwort.firstAntwort.sontigestext}"  /> </f:if>
+	<f:form.checkbox name='antwort[<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" property="uid"  />][value]' value="1"  checked='<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}"  />'   /> {antwort.antwort}
+	<f:if condition="{antwort.typ}==2"> <f:form.textfield name='antwort[<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" property="uid"  />][sontigestext]' value='<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" property="sontigestext"  />'  /> </f:if>
 </f:for>

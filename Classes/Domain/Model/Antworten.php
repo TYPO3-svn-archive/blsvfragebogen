@@ -4,7 +4,7 @@ namespace BLSV\Blsvfragebogen\Domain\Model;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2013 
+ *  (c) 2013 Berti Golf
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -34,11 +34,11 @@ namespace BLSV\Blsvfragebogen\Domain\Model;
 class Antworten extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
-	 * ReferentenUID
+	 * externenUID
 	 *
 	 * @var \integer
 	 */
-	protected $externeuid=0;
+	protected $externeuid = 0;
 
 	/**
 	 * Wert
@@ -62,24 +62,26 @@ class Antworten extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $sontigestext = '';
 
 	/**
-	 * feuser
+	 * fragebogenteilnehmer
 	 *
-	 * @var \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
+	 * @var \BLSV\Blsvfragebogen\Domain\Model\Fragebogenteilnehmer
 	 * @lazy
 	 */
-	protected $feuser;
+	protected $fragebogenteilnehmer;
 
 	/**
 	 * __construct
 	 *
-	 * @param \TYPO3\CMS\Extbase\Domain\Model\FrontendUser $feuser
+	 * @param \BLSV\Blsvfragebogen\Domain\Model\Fragebogenteilnehmer $fragebogenteilnehmer
+	 * @param number $externeUid
 	 * @return Antworten
 	 */
-	public function __construct(\TYPO3\CMS\Extbase\Domain\Model\FrontendUser $feuser) {
+	public function __construct( \BLSV\Blsvfragebogen\Domain\Model\Fragebogenteilnehmer $fragebogenteilnehmer, $externeUid=0 ) {
+echo 'Antworten Konstruktor';	
 		//Do not remove the next line: It would break the functionality
-		$this->initStorageObjects();
-		
-		$this->feuser = $feuser;
+		$this->initStorageObjects();	
+		$this->fragebogenteilnehmer = $fragebogenteilnehmer;
+		$this->externeuid = $externeUid;
 	}
 
 	/**
@@ -168,22 +170,22 @@ class Antworten extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	}
 
 	/**
-	 * Returns the feuser
+	 * Returns the fragebogenteilnehmer
 	 *
-	 * @return \TYPO3\CMS\Extbase\Domain\Model\FrontendUser $feuser
+	 * @return \BLSV\Blsvfragebogen\Domain\Model\Fragebogenteilnehmer $fragebogenteilnehmer
 	 */
-	public function getFeuser() {
-		return $this->feuser;
+	public function getFragebogenteilnehmer() {
+		return $this->fragebogenteilnehmer;
 	}
 
 	/**
-	 * Sets the feuser
+	 * Sets the fragebogenteilnehmer
 	 *
-	 * @param \TYPO3\CMS\Extbase\Domain\Model\FrontendUser $feuser
+	 * @param \BLSV\Blsvfragebogen\Domain\Model\Fragebogenteilnehmer $fragebogenteilnehmer
 	 * @return void
 	 */
-	public function setFeuser(\TYPO3\CMS\Extbase\Domain\Model\FrontendUser $feuser) {
-		$this->feuser = $feuser;
+	public function setFragebogenteilnehmer(\BLSV\Blsvfragebogen\Domain\Model\Fragebogenteilnehmer $fragebogenteilnehmer) {
+		$this->fragebogenteilnehmer = $fragebogenteilnehmer;
 	}
 
 }
