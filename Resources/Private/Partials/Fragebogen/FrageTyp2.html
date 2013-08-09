@@ -4,6 +4,6 @@
 <f:for each="{frage.moeglcheantworten}" as="antwort" >
   
 	<f:if condition="{antwort.typ}==2"><br /> </f:if>
-	<f:form.checkbox name='antwort[<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" property="uid"  />][value]' value="1"  checked='<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}"  />'   /> {antwort.antwort}
-	<f:if condition="{antwort.typ}==2"> <f:form.textfield name='antwort[<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" property="uid"  />][sontigestext]' value='<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" property="sontigestext"  />'  /> </f:if>
+	<f:form.checkbox name='antworten[<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" property="uid"  />][value]' value="1" checked='<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" /> == 1' /> {antwort.antwort}
+	<f:if condition="{antwort.typ}==2"> <f:form.textfield name='antworten[<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" property="uid"  />][sonstigestext]' value='<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" property="sonstigestext"  />'  /> </f:if>
 </f:for>

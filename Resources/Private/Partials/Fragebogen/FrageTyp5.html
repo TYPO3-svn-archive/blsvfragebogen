@@ -2,5 +2,5 @@
 <f:format.html>{frage.frage}</f:format.html>
 <f:for each="{frage.moeglcheantworten}" as="antwort" >
 
-	<f:form.textarea cols="40" rows="10"  name='antwort[<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" property="uid"  />][anmerkung]' value='<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" property="anmerkung"  />' />
+	<f:form.textarea cols="40" rows="10"  name='antworten[<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" property="uid"  />][anmerkung]' value='<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" property="anmerkung"  />' />
 </f:for>	

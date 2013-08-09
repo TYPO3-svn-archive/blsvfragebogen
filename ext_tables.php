@@ -92,7 +92,7 @@ $TCA['tx_blsvfragebogen_domain_model_antworten'] = array(
 			'starttime' => 'starttime',
 			'endtime' => 'endtime',
 		),
-		'searchFields' => 'externeuid,value,anmerkung,sontigestext,feuser,',
+		'searchFields' => 'externeuid,value,anmerkung,sonstigestext,feuser,',
 		'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Configuration/TCA/Antworten.php',
 		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_blsvfragebogen_domain_model_antworten.gif'
 	),

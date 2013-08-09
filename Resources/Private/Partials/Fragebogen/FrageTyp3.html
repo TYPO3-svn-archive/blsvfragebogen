@@ -14,12 +14,12 @@
 	
 	<f:for each="{frage.moeglcheantworten}" as="antwort" >
 		<tr>
-			<td>{antwort.antwort} <f:if condition="{antwort.typ}==2"><br /> <f:form.textfield name="antwort.{antwort.firstAntwort.uid}.sontigestext"  /> </f:if></td>
-			<td><f:form.radio name='antwort[<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" property="uid"  />][value]' value="1"  checked='<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" /> == 1' /></td>
-			<td><f:form.radio name='antwort[<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" property="uid"  />][value]' value="2" checked='<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" /> == 2' /></td>
-			<td><f:form.radio name='antwort[<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" property="uid"  />][value]' value="3" checked='<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" /> == 3'  /></td>
-			<td><f:form.radio name='antwort[<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" property="uid"  />][value]' value="4" checked='<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" /> == 4' /></td>
-			<td><f:form.textfield name='antwort[<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" property="uid"  />][anmerkung]'  value='<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" property="anmerkung"  />' /></td>
+			<td>{antwort.antwort} <f:if condition="{antwort.typ}==2"> <f:form.textfield name='antworten[<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" property="uid"  />][sonstigestext]' value='<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" property="sonstigestext"  />'  /> </f:if></td>
+			<td><f:form.radio name='antworten[<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" property="uid"  />][value]' value="1" checked='<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" /> == 1' /></td>
+			<td><f:form.radio name='antworten[<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" property="uid"  />][value]' value="2" checked='<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" /> == 2' /></td>
+			<td><f:form.radio name='antworten[<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" property="uid"  />][value]' value="3" checked='<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" /> == 3'  /></td>
+			<td><f:form.radio name='antworten[<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" property="uid"  />][value]' value="4" checked='<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" /> == 4' /></td>
+			<td><f:form.textfield name='antworten[<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" property="uid"  />][anmerkung]'  value='<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" property="anmerkung"  />' /></td>
 	</f:for>
 	<tr><th class="linksunten"></th>
 		<th></th>

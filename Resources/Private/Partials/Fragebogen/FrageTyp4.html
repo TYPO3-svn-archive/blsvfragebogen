@@ -1,6 +1,6 @@
 {namespace vh=BLSV\Blsvfragebogen\ViewHelpers}
 <f:format.html>{frage.frage}</f:format.html>
 <f:for each="{frage.moeglcheantworten}" as="antwort" >
-	<f:form.radio name='antwort[<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" property="uid"  />][value]' value="1"  checked='<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" /> == 1'  /> ja 
-	<f:form.radio name='antwort[<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" property="uid"  />][value]' value="2"   checked='<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" /> == 2' /> nein 
+	<f:form.radio name='antworten[<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" property="uid"  />][value]' value="1"  checked='<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" /> == 1'  /> ja 
+	<f:form.radio name='antworten[<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" property="uid"  />][value]' value="2"   checked='<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" /> == 2' /> nein 
 </f:for>

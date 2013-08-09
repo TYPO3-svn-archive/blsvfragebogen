@@ -1,5 +1,5 @@
+{namespace vh=BLSV\Blsvfragebogen\ViewHelpers}
 <f:format.html>{frage.frage}</f:format.html>
-
 <f:for each="{options.eintraege}" as="eintragsArt" key="externebezeichnung">
  	<f:if condition="{frage.externebezeichnung}=={externebezeichnung}">
 		<f:for each="{eintragsArt}" as="eintrag" >
@@ -16,14 +16,15 @@
 				</tr>
 				
 				<f:for each="{frage.moeglcheantworten}" as="antwort" >
-					<tr>
-						<td>{antwort.antwort} <f:if condition="{antwort.typ}==2"><br /> <f:form.textfield property="fragebogenteilnehmer.fragebogen.fragen.xantworten[{eintrag.uid}].antwort.sontigestext"  /> </f:if></td>
-						<td><f:form.radio name="fragebogenteilnehmer.fragebogen.fragen.xantworten[{eintrag.uid}][{antwort.uid}].antwort.value" value="1" /></td>
-						<td><f:form.radio name="fragebogenteilnehmer.fragebogen.fragen.xantworten[{eintrag.uid}][{antwort.uid}].antwort.value" value="2" /></td>
-						<td><f:form.radio name="fragebogenteilnehmer.fragebogen.fragen.xantworten[{eintrag.uid}][{antwort.uid}].antwort.value" value="3" /></td>
-						<td><f:form.radio name="fragebogenteilnehmer.fragebogen.fragen.xantworten[{eintrag.uid}][{antwort.uid}].antwort.value" value="4" /></td>
-						<td><f:form.textfield name="fragebogenteilnehmer.fragebogen.fragen.xantworten[{eintrag.uid}][{antwort.uid}].antwort.anmerkung"  /></td>
-				</f:for>
+					<tr>	<td>{antwort.antwort} <f:if condition="{antwort.typ}==2"> <f:form.textfield name='antworten[<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" externeUid="{eintrag.uid}" externeUid="{eintrag.uid}" property="uid"  />][sonstigestext]' value='<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" externeUid="{eintrag.uid}" property="sonstigestext"  />'  /> </f:if></td>
+						<td><f:form.radio name='antworten[<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" externeUid="{eintrag.uid}" property="uid"  />][value]' value="1" checked='<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" externeUid="{eintrag.uid}" /> == 1' /></td>
+						<td><f:form.radio name='antworten[<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" externeUid="{eintrag.uid}" property="uid"  />][value]' value="2" checked='<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" externeUid="{eintrag.uid}" /> == 2' /></td>
+						<td><f:form.radio name='antworten[<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" externeUid="{eintrag.uid}" property="uid"  />][value]' value="3" checked='<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" externeUid="{eintrag.uid}" /> == 3' /></td>
+						<td><f:form.radio name='antworten[<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" externeUid="{eintrag.uid}" property="uid"  />][value]' value="4" checked='<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" externeUid="{eintrag.uid}" /> == 4' /></td>
+						<td><f:form.textfield name='antworten[<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" externeUid="{eintrag.uid}" property="uid"  />][anmerkung]'  value='<vh:AntwortenUid moeglicheantwort="{antwort}" fragebogenteilnehmer="{fragebogenteilnehmer}" externeUid="{eintrag.uid}" property="anmerkung"  />' /></td>
+
+			
+						</f:for>
 				<tr><th class="linksunten"></th>
 					<th></th>
 					<th></th>

@@ -104,7 +104,7 @@ CREATE TABLE tx_blsvfragebogen_domain_model_antworten (
 	externeuid int(11) DEFAULT '0' NOT NULL,
 	value int(11) DEFAULT '0' NOT NULL,
 	anmerkung text NOT NULL,
-	sontigestext varchar(255) DEFAULT '' NOT NULL,
+	sonstigestext varchar(255) DEFAULT '' NOT NULL,
 	fragebogenteilnehmer int(11) unsigned DEFAULT '0', 
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,

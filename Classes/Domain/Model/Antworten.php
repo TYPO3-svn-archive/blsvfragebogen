@@ -59,7 +59,7 @@ class Antworten extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 *
 	 * @var \string
 	 */
-	protected $sontigestext = '';
+	protected $sonstigestext = '';
 
 	/**
 	 * fragebogenteilnehmer
@@ -151,22 +151,22 @@ echo 'Antworten Konstruktor';
 	}
 
 	/**
-	 * Returns the sontigestext
+	 * Returns the sonstigestext
 	 *
-	 * @return \string $sontigestext
+	 * @return \string $sonstigestext
 	 */
-	public function getSontigestext() {
-		return $this->sontigestext;
+	public function getSonstigestext() {
+		return $this->sonstigestext;
 	}
 
 	/**
-	 * Sets the sontigestext
+	 * Sets the sonstigestext
 	 *
-	 * @param \string $sontigestext
+	 * @param \string $sonstigestext
 	 * @return void
 	 */
-	public function setSontigestext($sontigestext) {
-		$this->sontigestext = $sontigestext;
+	public function setSonstigestext($sonstigestext) {
+		$this->sonstigestext = $sonstigestext;
 	}
 
 	/**

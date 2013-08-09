@@ -6,10 +6,10 @@ if (!defined ('TYPO3_MODE')) {
 $TCA['tx_blsvfragebogen_domain_model_antworten'] = array(
 	'ctrl' => $TCA['tx_blsvfragebogen_domain_model_antworten']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, externeuid, value, anmerkung, sontigestext, fragebogenteilnehmer',
+		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, externeuid, value, anmerkung, sonstigestext, fragebogenteilnehmer',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, externeuid, value, anmerkung, sontigestext, fragebogenteilnehmer,--div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access,starttime, endtime'),
+		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, externeuid, value, anmerkung, sonstigestext, fragebogenteilnehmer,--div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access,starttime, endtime'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -121,14 +121,14 @@ $TCA['tx_blsvfragebogen_domain_model_antworten'] = array(
 				'eval' => 'trim'
 			),
 		),
-		'sontigestext' => array(
+		'sonstigestext' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:blsvfragebogen/Resources/Private/Language/locallang_db.xlf:tx_blsvfragebogen_domain_model_antworten.sontigestext',
 			'config' => array(
 				'type' => 'input',
 				'size' => 30,
 				'eval' => 'trim'
-			),
+			), 
 		),
 		'fragebogenteilnehmer' => array(
 			'exclude' => 0,

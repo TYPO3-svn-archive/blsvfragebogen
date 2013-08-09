@@ -21,26 +21,12 @@ Otherwise your changes will be overwritten the next time you save the extension 
 
 <f:render partial="FormErrors" arguments="{object:Fragebogenteilnehmer}"/>
 
-
-
 <f:form action="update" name="fragebogenteilnehmer" object="{fragebogenteilnehmer}" >
-<f:render partial="Fragebogenteilnehmer/FormFields" arguments="{fragebogenteilnehmer:fragebogenteilnehmer}" />
-
-<f:for each="{moeglicheantworten.antworten}" as="antwort" key="id" >
-		<f:form.textfield name='antworten[{id}][value]' /><br />		
+	<f:render partial="Fragebogenteilnehmer/FormFields" arguments="{fragebogenteilnehmer:fragebogenteilnehmer}" />
+	<f:for each="{fragebogenteilnehmer.fragebogen.fragen}" as="frage"  >
+		<f:render partial="Fragebogen/FrageTyp{frage.typ}" arguments="{frage:frage, options:data, fragebogenteilnehmer:fragebogenteilnehmer}" /> <!-- rendert partial FrageTyp1.html,...,FrageTyp5.html  -->
 	</f:for>
-
-<f:for each="{fragebogenteilnehmer.fragebogen.fragen}" as="frage"  >
-		<f:render partial="Fragebogen/FrageTyp{frage.typ}" arguments="{frage:frage, options:options, fragebogenteilnehmer:fragebogenteilnehmer}" /> <!-- rendert partial FrageTyp1.html,...,FrageTyp5.html  -->
-</f:for>
- 
-
-
 	<f:form.submit value="Save" /> 
 </f:form>
-
-
-
-
 
 </f:section>

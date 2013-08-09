@@ -141,10 +141,12 @@ class FragebogenteilnehmerController extends \TYPO3\CMS\Extbase\Mvc\Controller\A
 	/**
 	 * action edit
 	 *
-	 * @param BLSV\Blsvfragebogenteilnehmer\Domain\Model\Fragebogenteilnehmer
+	 * @param BLSV\Blsvfragebogenteilnehmer\Domain\Model\Fragebogenteilnehmer $fragebogenteilnehmer
+	 * @param int $editHeader
+	 * @param array $eintraege
 	 * @return void
 	 */
-	public function editAction(\BLSV\Blsvfragebogen\Domain\Model\Fragebogenteilnehmer $fragebogenteilnehmer=NULL) {
+	public function editAction(\BLSV\Blsvfragebogen\Domain\Model\Fragebogenteilnehmer $fragebogenteilnehmer=NULL, $editHeader=0, $eintraege=array() ) {
 		
 		$eintraege['referenten'] = array(
 				array( 'uid' => 1, 'name'=> 'martin gonschor' ),
@@ -191,38 +193,55 @@ class FragebogenteilnehmerController extends \TYPO3\CMS\Extbase\Mvc\Controller\A
 
 	public function initializeUpdateAction(){
 		echo '<pre>';
-		print_r($_REQUEST);
-		// print_r($_REQUEST[tx_blsvfragebogen_pi1][test]);
-		
-		//$this->arguments['moeglicheantworten']->getPropertyMappingConfiguration()->allowProperties('__identity');
-		//$propertyMappingConfiguration->allowProperties('__identity');
-		
+		  //print_r($_REQUEST[tx_blsvfragebogen_pi1]['antworten']);
+		echo '</pre>';
 	}
 	
 	/**
 	 * action update
 	 * 
-	 * param \BLSV\Blsvfragebogen\Domain\Model\Fragebogenteilnehmer $fragebogenteilnehmer
+	 * @param \BLSV\Blsvfragebogen\Domain\Model\Fragebogenteilnehmer $fragebogenteilnehmer
 	 * 
-	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\BLSV\Blsvfragebogen\Domain\Model\Antworten> $antworten
+	 * @param array $antworten
 	 * @return void
 	 * 
 	*/
-	public function updateAction( \TYPO3\CMS\Extbase\Persistence\ObjectStorage $antworten = NULL) {
+	public function updateAction( \BLSV\Blsvfragebogen\Domain\Model\Fragebogenteilnehmer $fragebogenteilnehmer = Null, $antworten = null ) {
 		
-		print_r(get_class($antworten));
-		echo '<br />';		
-
-//		exit;
 		
-		//$this->fragebogenteilnehmerRepository->update($fragebogenteilnehmer);
-		//$this->flashMessageContainer->add('Your Fragebogenteilnehmer was updated.');
-		//$this->redirect('list');
-		$data = compact(
-			'test'
-		);
+			
+		if ( $fragebogenteilnehmer ){
+			if ( $antworten ){
+				$this->updateAntworten($antworten , $fragebogenteilnehmer->GetUid() );
+			}
+			$this->fragebogenteilnehmerRepository->update( $fragebogenteilnehmer );
+		}
 		
-		$this->view->assign('data', $data);
+		$this->redirect('list');
+	}
+	
+	/**
+	 * funstion update Antworten
+	 *
+	 * @param array $antworten
+	 * @parma integer $fragebogenteilnehmerUID
+	 * @return void
+	 *
+	*/
+	private function updateAntworten( $antworten=Null, $fragebogenteilnehmerUID=0 ){
+		if ( $antworten ) {
+			foreach ( $antworten as $uid => $arrAntwort ){
+				if ( $uid ){
+					$antwort = $this->antwortenRepository->findByUid( $uid );
+					if ( $antwort && ( $antwort->GetFragebogenteilnehmer()->GetUID() == $fragebogenteilnehmerUID ) ){
+						$antwort->setValue( $arrAntwort['value'] );
+						$antwort->setAnmerkung( $arrAntwort['anmerkung'] );
+						$antwort->setSonstigestext( $arrAntwort['sonstigestext'] );  
+						$this->antwortenRepository->update( $antwort );
+					}
+				}
+			}
+		}	
 	}
 
 	/**
