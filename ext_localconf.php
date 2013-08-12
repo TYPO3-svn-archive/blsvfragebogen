@@ -7,7 +7,7 @@ if (!defined('TYPO3_MODE')) {
 	'BLSV.' . $_EXTKEY,
 	'Pi1',
 	array(
-		'Fragebogenteilnehmer' => 'list, show, new, create, edit, update, delete',
+		'Fragebogenteilnehmer' => 'edit, list, show, new, create, update, delete',
 		
 	),
 	// non-cacheable actions

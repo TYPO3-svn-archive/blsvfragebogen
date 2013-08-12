@@ -35,5 +35,20 @@ class FragebogenteilnehmerRepository extends \TYPO3\CMS\Extbase\Persistence\Repo
 	public function persistAll(){
 		$this->persistenceManager->persistAll();
 	}
+	
+	/**
+	 * Liefert einen Eintrag mit Nr und FeUser
+	 * 
+	 * @param integer $nr
+	 * @param \TYPO3\CMS\Extbase\Domain\Model\FrontendUser $feuser
+	 */
+	public function findOneByNrAndFeuser($nr, \TYPO3\CMS\Extbase\Domain\Model\FrontendUser $feuser){
+		$query = $this->createQuery();
+		$query->matching($query->logicalAnd(
+			$query->equals('nr', $nr+100),
+			$query->equals('feuser', $feuser->getUid())
+		));
+		return $query->setLimit(1)->execute()->getFirst();
+	}
 }
 ?>

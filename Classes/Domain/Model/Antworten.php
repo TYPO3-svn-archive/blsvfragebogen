@@ -76,8 +76,7 @@ class Antworten extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @param number $externeUid
 	 * @return Antworten
 	 */
-	public function __construct( \BLSV\Blsvfragebogen\Domain\Model\Fragebogenteilnehmer $fragebogenteilnehmer, $externeUid=0 ) {
-echo 'Antworten Konstruktor';	
+	public function __construct( \BLSV\Blsvfragebogen\Domain\Model\Fragebogenteilnehmer $fragebogenteilnehmer, $externeUid=0 ) {	
 		//Do not remove the next line: It would break the functionality
 		$this->initStorageObjects();	
 		$this->fragebogenteilnehmer = $fragebogenteilnehmer;

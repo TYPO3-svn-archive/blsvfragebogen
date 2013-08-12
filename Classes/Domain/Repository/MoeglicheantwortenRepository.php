@@ -32,5 +32,8 @@ namespace BLSV\Blsvfragebogen\Domain\Repository;
  *
  */
 class MoeglicheantwortenRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
+	public function persistAll(){
+		$this->persistenceManager->persistAll();
+	}
 }
 ?>

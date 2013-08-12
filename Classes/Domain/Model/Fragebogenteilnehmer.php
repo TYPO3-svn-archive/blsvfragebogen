@@ -45,7 +45,7 @@ class Fragebogenteilnehmer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntit
 	 *
 	 * @var \integer
 	 */
-	protected $art;
+	protected $art=0;
 
 	/**
 	 * Veranstaltungsnummer

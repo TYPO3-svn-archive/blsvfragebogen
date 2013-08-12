@@ -142,55 +142,77 @@ class FragebogenteilnehmerController extends \TYPO3\CMS\Extbase\Mvc\Controller\A
 	 * action edit
 	 *
 	 * @param BLSV\Blsvfragebogenteilnehmer\Domain\Model\Fragebogenteilnehmer $fragebogenteilnehmer
+	 * @param array $veranstaltung
 	 * @param int $editHeader
 	 * @param array $eintraege
 	 * @return void
 	 */
-	public function editAction(\BLSV\Blsvfragebogen\Domain\Model\Fragebogenteilnehmer $fragebogenteilnehmer=NULL, $editHeader=0, $eintraege=array() ) {
+	public function editAction(\BLSV\Blsvfragebogen\Domain\Model\Fragebogenteilnehmer $fragebogenteilnehmer=NULL, $veranstaltung=array() , $editHeader=0, $eintraege=array() ) {
 		
-		$eintraege['referenten'] = array(
-				array( 'uid' => 1, 'name'=> 'martin gonschor' ),
-				array( 'uid' => 2, 'name'=> 'berti golf' )
-		);
-		
-		$eintraege['anderesExternesFeld'] = array(
-				array( 'uid' => 1, 'name'=> 'martin gonschor' ),
-				array( 'uid' => 2, 'name'=> 'berti golf' )
-		);
-		
-		
-
-		$neu = ( $fragebogenteilnehmer==NULL );
-		// $neu = true;
-		 
-		if ($neu) {
-			$fragebogenteilnehmer = new \BLSV\Blsvfragebogen\Domain\Model\Fragebogenteilnehmer();
-			$fragebogen = $this->fragebogenRepository->getFirst();
-			$fragebogenteilnehmer->setFragebogen( $fragebogen );
-			$fragebogenteilnehmer->setFeuser( $this->feuser );
-			$this->fragebogenteilnehmerRepository->add( $fragebogenteilnehmer );
+		if (!$eintraege){
+			$eintraege['referenten'] = array(
+					array( 'uid' => 1, 'name'=> 'Max Mustermann' ),
+					array( 'uid' => 2, 'name'=> 'Martina Musterfrau' )
+			);		
 		}
-	   
-		$fragebogen = $fragebogenteilnehmer->getFragebogen();
-	    $fehlendeAntworten = $fragebogen->getMoeglcheantwortenOhneAntworten( $fragebogenteilnehmer,$eintraege );
-	   
+		
+		if ( $fragebogenteilnehmer==NULL ) {
+			$fragebogenteilnehmer = $this->fragebogenteilnehmerRepository->findOneByNrAndFeuser( $veranstaltung['nr'], $this->feuser );
+			
+			if ( $fragebogenteilnehmer==NULL ) {
+				$veranstaltung = $this->checkVeranstaltung( $veranstaltung );	
+				$fragebogenteilnehmer = $this->createFunction( $veranstaltung );
+				
+			}
+		}
+		
+		$fehlendeAntworten =  $fragebogenteilnehmer->getFragebogen()->getMoeglcheantwortenOhneAntworten( $fragebogenteilnehmer, $eintraege );
+
 		foreach ($fehlendeAntworten as $fehlendeAntwort){
 			$this->moeglicheantwortenRepository->update( $fehlendeAntwort );
+			
 		}
-		
-		
-		$data = compact('fragebogenteilnehmer', 'fragebogen', 'eintraege', 'fehlendeAntworten');		
-		
-		
+		$this->moeglicheantwortenRepository->persistAll();
+		$options = compact('eintraege','editHeader');
 		$this->view->assign('fragebogenteilnehmer', $fragebogenteilnehmer);
-		$this->view->assign('eintraege', $eintraege);
+		$this->view->assign('options', $options);
+	}
+	
+	/**
+	 * 
+	 * @param array $veranstaltung
+	 * @return \BLSV\Blsvfragebogen\Domain\Model\Fragebogenteilnehmer
+	 */
+	private function createFunction( $veranstaltung=array() ){
+			$fragebogenteilnehmer = new \BLSV\Blsvfragebogen\Domain\Model\Fragebogenteilnehmer();
+			$fragebogenteilnehmer->setFragebogen( $this->fragebogenRepository->getFirst() );
+			$fragebogenteilnehmer->setFeuser( $this->feuser );
+			$fragebogenteilnehmer->setTitel( $veranstaltung['titel'] );
+			$fragebogenteilnehmer->setNr( $veranstaltung['nr'] );
+			$fragebogenteilnehmer->setOrt( $veranstaltung['ort'] );
+			$fragebogenteilnehmer->setBegin( $veranstaltung['begin'] );
+			$fragebogenteilnehmer->setEnd( $veranstaltung['end'] );
+			$this->fragebogenteilnehmerRepository->add( $fragebogenteilnehmer );
+			$this->fragebogenteilnehmerRepository->persistAll();
+			return $fragebogenteilnehmer;
 		
-		$this->view->assign('data', $data);
-		
-		$moeglicheantworten = $this->moeglicheantwortenRepository->findByUid(1);
-		$this->view->assign('moeglicheantworten', $moeglicheantworten);
 	}
 
+	/**
+	 *
+	 * @return array
+	 */
+	private function checkVeranstaltung( ){
+		if ( !$veranstaltung['titel'] ) $veranstaltung['titel'] = 'Neue Veranstaltung';
+		if ( !$veranstaltung['ort'] ) $veranstaltung['ort'] = 'Ort';
+		if ( !$veranstaltung['nr'] ) $veranstaltung['nr'] = 0;
+		if ( ! ( is_object( $veranstaltung['begin'] ) &&  get_class( $veranstaltung['begin']=='DateTime' ) ) ) $veranstaltung['begin'] =  new \DateTime();
+		if ( ! ( is_object( $veranstaltung['end'] ) &&  get_class( $veranstaltung['end']!='DateTime' ) ) ) $veranstaltung['end'] =  new \DateTime();
+		
+	
+		return $veranstaltung;
+	}
+	
 	public function initializeUpdateAction(){
 		echo '<pre>';
 		  //print_r($_REQUEST[tx_blsvfragebogen_pi1]['antworten']);

@@ -205,7 +205,7 @@ class Moeglicheantworten extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity 
 				else{ //if there is no fragebogenteilnehmer given, check antworten with feuser
 					$fragebogenteilnehmerIskorrekt = $antwort->getFragebogenteilnehmer() && ($antwort->getFragebogenteilnehmer()->getFeuser()->getUid() == $GLOBALS['TSFE']->fe_user->user['uid']);
 				}
-				
+
 				if( $fragebogenteilnehmerIskorrekt && ( $antwort->getExterneuid() === $externUid ) ){					
 					return $antwort;
 				}
