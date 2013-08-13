@@ -4,7 +4,8 @@ namespace BLSV\Blsvfragebogen\Controller;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2013 
+ *  (c) 2013  Berti Golf, <berti.golf@blsv.de>, BLSV
+ *  Martin Gonschor <martin.gonschor@blsv.de>, BLSV
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -160,12 +161,13 @@ class FragebogenteilnehmerController extends \TYPO3\CMS\Extbase\Mvc\Controller\A
 			$fragebogenteilnehmer = $this->fragebogenteilnehmerRepository->findOneByNrAndFeuser( $veranstaltung['nr'], $this->feuser );
 			
 			if ( $fragebogenteilnehmer==NULL ) {
+				
 				$veranstaltung = $this->checkVeranstaltung( $veranstaltung );	
 				$fragebogenteilnehmer = $this->createFunction( $veranstaltung );
 				
 			}
 		}
-		
+		//echo '<pre>'; print_r($veranstaltung);die();
 		$fehlendeAntworten =  $fragebogenteilnehmer->getFragebogen()->getMoeglcheantwortenOhneAntworten( $fragebogenteilnehmer, $eintraege );
 
 		foreach ($fehlendeAntworten as $fehlendeAntwort){
@@ -200,14 +202,29 @@ class FragebogenteilnehmerController extends \TYPO3\CMS\Extbase\Mvc\Controller\A
 
 	/**
 	 *
+	 * @param array $veranstaltung
 	 * @return array
 	 */
-	private function checkVeranstaltung( ){
+	private function checkVeranstaltung( $veranstaltung=array() ){
 		if ( !$veranstaltung['titel'] ) $veranstaltung['titel'] = 'Neue Veranstaltung';
 		if ( !$veranstaltung['ort'] ) $veranstaltung['ort'] = 'Ort';
 		if ( !$veranstaltung['nr'] ) $veranstaltung['nr'] = 0;
-		if ( ! ( is_object( $veranstaltung['begin'] ) &&  get_class( $veranstaltung['begin']=='DateTime' ) ) ) $veranstaltung['begin'] =  new \DateTime();
-		if ( ! ( is_object( $veranstaltung['end'] ) &&  get_class( $veranstaltung['end']!='DateTime' ) ) ) $veranstaltung['end'] =  new \DateTime();
+		if ( ! ( is_object( $veranstaltung['begin'] ) &&  get_class( $veranstaltung['begin']=='DateTime' ) ) ) {
+			try {
+				$veranstaltung['begin'] =  new \DateTime( $veranstaltung['begin'] );
+			} 
+			catch (Exception $e) {
+				$veranstaltung['begin'] =  new \DateTime();
+			}			
+		}
+		if ( ! ( is_object( $veranstaltung['end'] ) &&  get_class( $veranstaltung['end']!='DateTime' ) ) ) {
+			try {
+				$veranstaltung['end'] =  new \DateTime( $veranstaltung['end'] );
+			} 
+			catch (Exception $e) {
+				$veranstaltung['end'] =  new \DateTime();
+			}			
+		}
 		
 	
 		return $veranstaltung;

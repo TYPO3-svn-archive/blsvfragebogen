@@ -4,7 +4,8 @@ namespace BLSV\Blsvfragebogen\Domain\Model;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2013 
+ *  (c) 2013  Berti Golf, <berti.golf@blsv.de>, BLSV
+ *  Martin Gonschor <martin.gonschor@blsv.de>, BLSV
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
